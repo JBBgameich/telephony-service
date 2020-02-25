@@ -38,13 +38,13 @@ OfonoAccountEntry::OfonoAccountEntry(const Tp::AccountPtr &account, QObject *par
             SIGNAL(statusMessageChanged()),
             SIGNAL(emergencyCallsAvailableChanged()));
 
-    mUssdManager = new USSDManager(this, this);
+    //mUssdManager = new USSDManager(this, this);
 }
 
-USSDManager *OfonoAccountEntry::ussdManager() const
+/*USSDManager *OfonoAccountEntry::ussdManager() const
 {
     return mUssdManager;
-}
+}*/
 
 QString OfonoAccountEntry::modemName()
 {

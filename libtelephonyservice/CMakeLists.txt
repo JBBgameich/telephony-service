@@ -22,7 +22,7 @@ set(library_SRCS
     rolesinterface.cpp
     telepathyhelper.cpp
     tonegenerator.cpp
-    ussdmanager.cpp
+    #ussdmanager.cpp
     )
 
 include_directories(

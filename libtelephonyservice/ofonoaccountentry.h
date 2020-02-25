@@ -37,7 +37,7 @@ class OfonoAccountEntry : public AccountEntry
     Q_PROPERTY(bool simLocked READ simLocked NOTIFY simLockedChanged)
     Q_PROPERTY(QString serial READ serial NOTIFY serialChanged)
     Q_PROPERTY(QString countryCode READ countryCode NOTIFY countryCodeChanged)
-    Q_PROPERTY(USSDManager* ussdManager READ ussdManager CONSTANT)
+    //Q_PROPERTY(USSDManager* ussdManager READ ussdManager CONSTANT)
     Q_PROPERTY(QString modemName READ modemName CONSTANT)
     friend class AccountEntryFactory;
 
@@ -51,7 +51,7 @@ public:
     bool emergencyCallsAvailable() const;
     bool simLocked() const;
     QString serial() const;
-    USSDManager *ussdManager() const;
+    //USSDManager *ussdManager() const;
     QString modemName();
 
     // reimplemented from AccountEntry

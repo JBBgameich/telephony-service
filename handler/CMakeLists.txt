@@ -9,7 +9,7 @@ set(qt_SRCS
     callagent.cpp
     audioroutemanager.cpp
     callhandler.cpp
-    chatstartingjob.cpp
+    #chatstartingjob.cpp
     farstreamchannel.cpp
     handler.cpp
     handlerdbus.cpp
