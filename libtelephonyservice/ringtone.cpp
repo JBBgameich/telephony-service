@@ -44,7 +44,7 @@ void RingtoneWorker::playIncomingCallSound()
     stopIncomingCallSound();
 
     // pick up the new ringtone in case it changed in the meantime
-    //mCallAudioPlaylist.addMedia(QUrl::fromLocalFile(GreeterContacts::instance()->incomingCallSound()));
+    mCallAudioPlaylist.addMedia(QUrl::fromLocalFile("TODO/future/plamo/ringtone"));
     mCallAudioPlayer = new QMediaPlayer(this);
     mCallAudioPlayer->setAudioRole(QAudio::RingtoneRole);
     mCallAudioPlayer->setPlaylist(&mCallAudioPlaylist);
