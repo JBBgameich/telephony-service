@@ -28,7 +28,7 @@
 #include <QQmlListProperty>
 #include <TelepathyQt/TextChannel>
 #include "rolesinterface.h"
-#include "participant.h"
+//#include "participant.h"
 
 class AccountEntry;
 class Participant;

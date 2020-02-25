@@ -24,7 +24,7 @@
 #include "accountentry.h"
 #include "chatentry.h"
 #include "chatmanager.h"
-#include "participant.h"
+//#include "participant.h"
 
 // FIXME: move this class to libtelephonyservice
 #include "handler/messagejob.h"

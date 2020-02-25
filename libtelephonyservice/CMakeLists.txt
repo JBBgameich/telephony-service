@@ -8,13 +8,13 @@ set(library_SRCS
     callmanager.cpp
     callnotification.cpp
     channelobserver.cpp
-    chatmanager.cpp
-    chatentry.cpp
-    contactutils.cpp
-    contactwatcher.cpp
-    greetercontacts.cpp
+    #chatmanager.cpp
+    #chatentry.cpp
+    #contactutils.cpp
+    #contactwatcher.cpp
+    #greetercontacts.cpp
     ofonoaccountentry.cpp
-    participant.cpp
+    #participant.cpp
     phoneutils.cpp
     protocol.cpp
     protocolmanager.cpp
@@ -39,6 +39,6 @@ target_link_libraries(telephonyservice
                       ${LibPhoneNumber_LIBRARIES}
                       ${URL_DISPATCHER_LIBRARIES})
 
-qt5_use_modules(telephonyservice Contacts Core DBus Feedback Multimedia Qml Quick Gui)
+qt5_use_modules(telephonyservice Core DBus Multimedia Qml Quick Gui)
 
 enable_coverage(telephonyservice)

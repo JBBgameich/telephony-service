@@ -27,7 +27,7 @@
 #include <QMediaPlayer>
 #include <QMediaPlaylist>
 #include <QFile>
-#include <QFeedbackHapticsEffect>
+//#include <QFeedbackHapticsEffect>
 #include <QDBusReply>
 #include <QDBusServiceWatcher>
 #include <QtDBus/QDBusInterface>
@@ -70,7 +70,7 @@ public Q_SLOTS:
 
 private:
     explicit Ringtone(QObject *parent = 0);
-    QFeedbackHapticsEffect mVibrateEffect;
+    //QFeedbackHapticsEffect mVibrateEffect;
     RingtoneWorker *mWorker;
     QThread mThread;
 };

@@ -137,7 +137,7 @@ void MessageSendingJob::findOrCreateChannel()
 {
     qDebug() << __PRETTY_FUNCTION__;
     // now that we know what account to use, find existing channels or request a new one
-    QList<Tp::TextChannelPtr> channels = mTextHandler->existingChannels(mAccount->accountId(), mMessage.properties);
+    /*QList<Tp::TextChannelPtr> channels = mTextHandler->existingChannels(mAccount->accountId(), mMessage.properties);
     if (channels.isEmpty()) {
         ChatStartingJob *job = new ChatStartingJob(mTextHandler, mAccount->accountId(), mMessage.properties);
         connect(job, &MessageJob::finished, [this, job]() {
@@ -155,7 +155,7 @@ void MessageSendingJob::findOrCreateChannel()
     }
 
     mTextChannel = channels.last();
-    sendMessage();
+    sendMessage();*/
 }
 
 void MessageSendingJob::sendMessage()

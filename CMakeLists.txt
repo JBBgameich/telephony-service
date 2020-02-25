@@ -26,7 +26,7 @@ configure_file("${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"
 add_custom_target(uninstall "${CMAKE_COMMAND}"
                   -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
 
-find_package(Qt5Contacts)
+#find_package(Qt5Contacts)
 find_package(Qt5DBus)
 find_package(Qt5Multimedia)
 find_package(Qt5Qml)
@@ -107,18 +107,18 @@ set(ASSETS_DIR assets)
 install(DIRECTORY ${ASSETS_DIR} DESTINATION ${TELEPHONY_SERVICE_DIR})
 
 add_subdirectory(libtelephonyservice)
-add_subdirectory(Ubuntu)
 add_subdirectory(handler)
 add_subdirectory(tools)
 add_subdirectory(icons)
 add_subdirectory(po)
-add_subdirectory(tests)
+#add_subdirectory(tests)
 add_subdirectory(protocols)
 add_subdirectory(accounts)
 
 if (WANT_UI_SERVICES)
     add_subdirectory(indicator)
     add_subdirectory(approver)
+    add_subdirectory(Ubuntu)
 endif()
 
 include(EnableCoverageReport)

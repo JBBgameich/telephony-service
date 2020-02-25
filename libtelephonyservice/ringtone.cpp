@@ -19,7 +19,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "greetercontacts.h"
+//#include "greetercontacts.h"
 #include "ringtone.h"
 
 RingtoneWorker::RingtoneWorker(QObject *parent) :
@@ -36,15 +36,15 @@ void RingtoneWorker::playIncomingCallSound()
         return;
     }
 
-    if (GreeterContacts::instance()->silentMode()) {
-        return;
-    }
+    //if (GreeterContacts::instance()->silentMode()) {
+    //    return;
+    //}
 
     // force delete all media player instances
     stopIncomingCallSound();
 
     // pick up the new ringtone in case it changed in the meantime
-    mCallAudioPlaylist.addMedia(QUrl::fromLocalFile(GreeterContacts::instance()->incomingCallSound()));
+    //mCallAudioPlaylist.addMedia(QUrl::fromLocalFile(GreeterContacts::instance()->incomingCallSound()));
     mCallAudioPlayer = new QMediaPlayer(this);
     mCallAudioPlayer->setAudioRole(QAudio::RingtoneRole);
     mCallAudioPlayer->setPlaylist(&mCallAudioPlaylist);
@@ -68,9 +68,9 @@ void RingtoneWorker::playIncomingMessageSound()
         return;
     }
 
-    if (GreeterContacts::instance()->silentMode()) {
+    /*if (GreeterContacts::instance()->silentMode()) {
         return;
-    }
+    }*/
 
     // Re-create if in error state. A typical case is when media-hub-server has
     // crashed and we need to start from a clean slate.
@@ -96,7 +96,7 @@ void RingtoneWorker::playIncomingMessageSound()
         return;
     }
 
-    mMessageAudioPlayer->setMedia(QUrl::fromLocalFile(GreeterContacts::instance()->incomingMessageSound()));
+    //mMessageAudioPlayer->setMedia(QUrl::fromLocalFile(GreeterContacts::instance()->incomingMessageSound()));
     mMessageAudioPlayer->play();
 }
 
@@ -115,7 +115,7 @@ Ringtone::Ringtone(QObject *parent) :
     mWorker = new RingtoneWorker();
     mWorker->moveToThread(&mThread);
     mThread.start();
-    mVibrateEffect.setDuration(500);
+    //mVibrateEffect.setDuration(500);
 }
 
 Ringtone::~Ringtone()
@@ -142,9 +142,9 @@ void Ringtone::stopIncomingCallSound()
 
 void Ringtone::playIncomingMessageSound()
 {
-    if (GreeterContacts::instance()->incomingMessageVibrate()) {
+    /*if (GreeterContacts::instance()->incomingMessageVibrate()) {
         mVibrateEffect.start();
-    }
+    }*/
 
     QMetaObject::invokeMethod(mWorker, "playIncomingMessageSound", Qt::QueuedConnection);
 }

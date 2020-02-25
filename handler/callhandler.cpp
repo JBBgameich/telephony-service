@@ -26,7 +26,7 @@
 #include "telepathyhelper.h"
 #include "accountentry.h"
 #include "tonegenerator.h"
-#include "greetercontacts.h"
+//#include "greetercontacts.h"
 #include "phoneutils.h"
 #include <TelepathyQt/ContactManager>
 #include <TelepathyQt/PendingContacts>
@@ -187,11 +187,11 @@ void CallHandler::sendDTMF(const QString &objectPath, const QString &key)
      * dialpad sounds
      */
     int event = toDTMFEvent(key);
-    if (GreeterContacts::instance()->dialpadSoundsEnabled() &&
+    /*if (GreeterContacts::instance()->dialpadSoundsEnabled() &&
         !GreeterContacts::instance()->silentMode() && objectPath.isEmpty()
         || !objectPath.isEmpty()) {
         ToneGenerator::instance()->playDTMFTone(event);
-    }
+    }*/
 
     Tp::CallChannelPtr channel = callFromObjectPath(objectPath);
     if (channel.isNull()) {

@@ -24,10 +24,6 @@
 #define CONTACTWATCHER_H
 
 #include <QObject>
-#include <QContactManager>
-#include <QContactAbstractRequest>
-#include <QContactFetchRequest>
-#include <QContactIntersectionFilter>
 #include <QQmlParserStatus>
 
 QTCONTACTS_USE_NAMESPACE

@@ -28,7 +28,7 @@
 #include "chatmanager.h"
 #include "callmanager.h"
 #include "config.h"
-#include "greetercontacts.h"
+//#include "greetercontacts.h"
 #include "protocolmanager.h"
 
 #include <TelepathyQt/AccountSet>
@@ -95,11 +95,11 @@ TelepathyHelper::TelepathyHelper(QObject *parent)
             SLOT(onAccountManagerReady(Tp::PendingOperation*)));
 
     mClientRegistrar = Tp::ClientRegistrar::create(mAccountManager);
-    connect(GreeterContacts::instance(), SIGNAL(phoneSettingsChanged(QString)), this, SLOT(onPhoneSettingsChanged(QString)));
-    connect(GreeterContacts::instance(), SIGNAL(soundSettingsChanged(QString)), this, SLOT(onPhoneSettingsChanged(QString)));
+//    connect(GreeterContacts::instance(), SIGNAL(phoneSettingsChanged(QString)), this, SLOT(onPhoneSettingsChanged(QString)));
+//    connect(GreeterContacts::instance(), SIGNAL(soundSettingsChanged(QString)), this, SLOT(onPhoneSettingsChanged(QString)));
     connect(&mFlightModeInterface, SIGNAL(FlightModeChanged(bool)), this, SIGNAL(flightModeChanged()));
 
-    mMmsEnabled = GreeterContacts::instance()->mmsEnabled();
+//    mMmsEnabled = GreeterContacts::instance()->mmsEnabled();
 }
 
 TelepathyHelper::~TelepathyHelper()
@@ -120,20 +120,20 @@ QStringList TelepathyHelper::accountIds()
         Q_FOREACH(const AccountEntry *account, mAccounts) {
             ids << account->accountId();
         }
-    } else if (!GreeterContacts::instance()->isGreeterMode()) {
+    }/* else if (!GreeterContacts::instance()->isGreeterMode()) {
         // if we are in greeter mode, we should not initialize the handler to get the account IDs
         QDBusReply<QStringList> reply = handlerInterface()->call("AccountIds");
         if (reply.isValid()) {
             ids = reply.value();
         }
-    }
+    }*/
 
     return ids;
 }
 
 void TelepathyHelper::setMmsEnabled(bool enable)
 {
-    GreeterContacts::instance()->setMmsEnabled(enable);
+    //GreeterContacts::instance()->setMmsEnabled(enable);
 }
 
 bool TelepathyHelper::mmsEnabled()
@@ -340,8 +340,8 @@ void TelepathyHelper::registerChannelObserver(const QString &observerName)
         // we don't connect managers in handler, as they query the handler and cause a deadlock
         if (QCoreApplication::applicationName() != "telephony-service-handler") {
             // messages
-            connect(mChannelObserver, SIGNAL(textChannelAvailable(Tp::TextChannelPtr)),
-                    ChatManager::instance(), SLOT(onTextChannelAvailable(Tp::TextChannelPtr)));
+            //connect(mChannelObserver, SIGNAL(textChannelAvailable(Tp::TextChannelPtr)),
+            //        ChatManager::instance(), SLOT(onTextChannelAvailable(Tp::TextChannelPtr)));
 
             // calls
             connect(mChannelObserver, SIGNAL(callChannelAvailable(Tp::CallChannelPtr)),
@@ -572,11 +572,11 @@ void TelepathyHelper::setDefaultAccount(AccountType type, AccountEntry* account)
 
     QString modemObjName = account->account()->parameters().value("modem-objpath").toString();
     if (!modemObjName.isEmpty()) {
-        if (type == Voice) {
-            GreeterContacts::instance()->setDefaultSimForCalls(modemObjName);
-        } else if (type == Messaging) {
-            GreeterContacts::instance()->setDefaultSimForMessages(modemObjName);
-        }
+//        if (type == Voice) {
+//            GreeterContacts::instance()->setDefaultSimForCalls(modemObjName);
+//        } else if (type == Messaging) {
+//            GreeterContacts::instance()->setDefaultSimForMessages(modemObjName);
+//        }
     }
 }
 
@@ -594,32 +594,33 @@ bool TelepathyHelper::emergencyCallsAvailable() const
 
 bool TelepathyHelper::dialpadSoundsEnabled() const
 {
-    return GreeterContacts::instance()->dialpadSoundsEnabled();
+    //return GreeterContacts::instance()->dialpadSoundsEnabled();
+    return false;
 }
 
 void TelepathyHelper::setDialpadSoundsEnabled(bool enabled)
 {
-    GreeterContacts::instance()->setDialpadSoundsEnabled(enabled);
+    //GreeterContacts::instance()->setDialpadSoundsEnabled(enabled);
 }
 
 void TelepathyHelper::onPhoneSettingsChanged(const QString &key)
 {
     if (key == "DefaultSimForMessages") {
-        QString defaultSim = GreeterContacts::instance()->defaultSimForMessages();
-        if (defaultSim == "ask") {
-            mDefaultMessagingAccount = NULL;
-            Q_EMIT defaultMessagingAccountChanged();
-            return;
-        }
+//        QString defaultSim = GreeterContacts::instance()->defaultSimForMessages();
+//        if (defaultSim == "ask") {
+//            mDefaultMessagingAccount = NULL;
+//            Q_EMIT defaultMessagingAccountChanged();
+//            return;
+//        }
         
-        Q_FOREACH(AccountEntry *account, TelepathyHelper::instance()->accounts()) {
-            QString modemObjName = account->account()->parameters().value("modem-objpath").toString();
-            if (modemObjName == defaultSim) {
-                mDefaultMessagingAccount = account;
-                Q_EMIT defaultMessagingAccountChanged();
-                return;
-            }
-        }
+//        Q_FOREACH(AccountEntry *account, TelepathyHelper::instance()->accounts()) {
+//            QString modemObjName = account->account()->parameters().value("modem-objpath").toString();
+//            if (modemObjName == defaultSim) {
+//                mDefaultMessagingAccount = account;
+//                Q_EMIT defaultMessagingAccountChanged();
+//                return;
+//            }
+//        }
         mDefaultMessagingAccount = NULL;
         Q_EMIT defaultMessagingAccountChanged();
     } else if (key == "DefaultSimForCalls") {
@@ -633,29 +634,29 @@ void TelepathyHelper::onPhoneSettingsChanged(const QString &key)
             }
         }
 
-        // if no VOIP account, get the default modem setting
-        QString defaultSim = GreeterContacts::instance()->defaultSimForCalls();
-        if (defaultSim == "ask") {
-            mDefaultCallAccount = NULL;
-            Q_EMIT defaultCallAccountChanged();
-            return;
-        }
+//        // if no VOIP account, get the default modem setting
+//        QString defaultSim = GreeterContacts::instance()->defaultSimForCalls();
+//        if (defaultSim == "ask") {
+//            mDefaultCallAccount = NULL;
+//            Q_EMIT defaultCallAccountChanged();
+//            return;
+//        }
         
-        Q_FOREACH(AccountEntry *account, TelepathyHelper::instance()->accounts()) {
-            QString modemObjName = account->account()->parameters().value("modem-objpath").toString();
-            if (modemObjName == defaultSim) {
-                mDefaultCallAccount = account;
-                Q_EMIT defaultCallAccountChanged();
-                return;
-            }
-        }
+//        Q_FOREACH(AccountEntry *account, TelepathyHelper::instance()->accounts()) {
+//            QString modemObjName = account->account()->parameters().value("modem-objpath").toString();
+//            if (modemObjName == defaultSim) {
+//                mDefaultCallAccount = account;
+//                Q_EMIT defaultCallAccountChanged();
+//                return;
+//            }
+//        }
         mDefaultCallAccount = NULL;
         Q_EMIT defaultCallAccountChanged();
     } else if (key == "MmsEnabled") {
-        mMmsEnabled = GreeterContacts::instance()->mmsEnabled();
+        //mMmsEnabled = GreeterContacts::instance()->mmsEnabled();
         Q_EMIT mmsEnabledChanged();
     } else if (key == "SimNames") {
-        mSimNames = GreeterContacts::instance()->simNames();
+        //mSimNames = GreeterContacts::instance()->simNames();
         Q_EMIT simNamesChanged();
     } else if (key == "DialpadSoundsEnabled") {
         Q_EMIT dialpadSoundsEnabledChanged();

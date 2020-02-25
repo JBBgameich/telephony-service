@@ -64,8 +64,8 @@ int main(int argc, char **argv)
 
     QObject::connect(handler, SIGNAL(callChannelAvailable(Tp::CallChannelPtr)),
                      CallHandler::instance(), SLOT(onCallChannelAvailable(Tp::CallChannelPtr)));
-    QObject::connect(handler, SIGNAL(textChannelAvailable(Tp::TextChannelPtr)),
-                     TextHandler::instance(), SLOT(onTextChannelAvailable(Tp::TextChannelPtr)));
+    //QObject::connect(handler, SIGNAL(textChannelAvailable(Tp::TextChannelPtr)),
+    //                 TextHandler::instance(), SLOT(onTextChannelAvailable(Tp::TextChannelPtr)));
 
     QObject::connect(TelepathyHelper::instance(), SIGNAL(setupReady()),
                      HandlerDBus::instance(), SLOT(connectToBus()));

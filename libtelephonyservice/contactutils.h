@@ -22,7 +22,6 @@
 #ifndef CONTACTUTILS_H
 #define CONTACTUTILS_H
 
-#include <QContactManager>
 #include <QContact>
 
 #define OFONO_UNKNOWN_NUMBER "x-ofono-unknown"

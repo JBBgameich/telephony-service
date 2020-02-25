@@ -23,8 +23,6 @@
 #ifndef PARTICIPANT_H
 #define PARTICIPANT_H
 
-#include "contactwatcher.h"
-
 class Participant : public ContactWatcher
 {
     Q_OBJECT
